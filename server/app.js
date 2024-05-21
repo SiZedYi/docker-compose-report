@@ -1,17 +1,25 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const mysql = require('mysql2');
+const cors = require('cors'); // Thêm dòng này
+
+
 
 const app = express();
+app.use(cors()); // Và dòng này
+
 const port = 3000;
 
 // Thiết lập kết nối đến MySQL
-const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: 'anhthang123', // Thay bằng mật khẩu MySQL của bạn
-    database: 'todo_db'
-}).promise();
+const pool = mysql
+  .createPool({
+    host: "localhost",
+    user: "root",
+    password: "sapassword", // Để trống nếu không có mật khẩu
+    database: "todo_db",
+    port: 3305, // Thêm dòng này
+  })
+  .promise();
 
 app.use(bodyParser.json());
 
