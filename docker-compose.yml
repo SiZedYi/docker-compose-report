@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  node-app:
+    build:
+      context: .
+      dockerfile: ./server/Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+    environment:
+      MYSQL_PORT: 3306
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: anhthang123
+      MYSQL_DATABASE: todo_db
+    volumes:
+      - ./server:/app  # Mount thư mục server vào /app trong container
+
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3307:3306" #Ánh xạ port 3307 của máy host với 3306 của mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: anhthang123
+      MYSQL_DATABASE: todo_db
+    volumes:
+      - ./dump/todo_db_todos.sql:/docker-entrypoint-initdb.d/todo_db_todos.sql  # Mount todo_db_todos.sql vào thư mục khởi tạo của MySQL
