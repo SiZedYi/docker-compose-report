@@ -11,15 +11,13 @@ app.use(cors()); // Và dòng này
 const port = 3000;
 
 // Thiết lập kết nối đến MySQL
-const pool = mysql
-  .createPool({
-    host: "localhost",
-    user: "root",
-    password: "sapassword", // Để trống nếu không có mật khẩu
-    database: "todo_db",
-    port: 3305, // Thêm dòng này
-  })
-  .promise();
+const pool = mysql.createPool({
+    port: process.env.MYSQL_PORT || 3306,
+    host: process.env.MYSQL_HOST || 'localhost',
+    user:  process.env.MYSQL_USER || 'root',
+    password: process.env.MYSQL_PASSWORD || 'anhthang123', // Thay bằng mật khẩu MySQL của bạn
+    database: process.env.MYSQL_DATABASE || 'todo_db'
+}).promise();
 
 app.use(bodyParser.json());
 
