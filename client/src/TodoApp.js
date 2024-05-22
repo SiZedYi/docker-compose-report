@@ -12,7 +12,7 @@ const TodoApp = () => {
   // Lấy danh sách todos
   useEffect(() => {
     axios
-      .get("http://localhost:3000/api/todos")
+      .get("http://localhost:3001/api/todos")
       .then((response) => setTodos(response.data))
       .catch((error) => console.error(`Error: ${error}`));
   }, []);
@@ -20,7 +20,7 @@ const TodoApp = () => {
   // Thêm mới todo
   const addTodo = () => {
     axios
-      .post("http://localhost:3000/api/todos", newTodo)
+      .post("http://localhost:3001/api/todos", newTodo)
       .then((response) => setTodos([...todos, response.data]))
       .catch((error) => console.error(`Error: ${error}`));
   };
@@ -28,7 +28,7 @@ const TodoApp = () => {
   // Sửa todo
   const updateTodo = (id, updatedTodo) => {
     axios
-      .put(`http://localhost:3000/api/todos/${id}`, updatedTodo)
+      .put(`http://localhost:3001/api/todos/${id}`, updatedTodo)
       .then((response) => {
         const updatedTodos = todos.map((todo) =>
           todo.id === id ? response.data : todo
@@ -41,7 +41,7 @@ const TodoApp = () => {
   // Xóa todo
   const deleteTodo = (id) => {
     axios
-      .delete(`http://localhost:3000/api/todos/${id}`)
+      .delete(`http://localhost:3001/api/todos/${id}`)
       .then(() => {
         const remainingTodos = todos.filter((todo) => todo.id !== id);
         setTodos(remainingTodos);

@@ -8,7 +8,7 @@ const cors = require('cors'); // Thêm dòng này
 const app = express();
 app.use(cors()); // Và dòng này
 
-const port = 3000;
+const port = 3001;
 
 // Thiết lập kết nối đến MySQL
 const pool = mysql.createPool({
